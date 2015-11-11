@@ -16,11 +16,11 @@
     <%= f.text_field :title %>
   </div>
   <div class="field">
-    <%= f.label(:description,"説明" ) %><br>
-    <%= f.text_area(:description,rows:6) %>
+    <%= f.label(:description, "説明") %><br>
+    <%= f.text_area :description,rows:6 %>
   </div>
   <div class="field">
-    <%= f.label(:image_url, "商品画像") %><br>
+    <%= f.label(:image_url, "写真") %><br>
     <%= f.text_field :image_url %>
   </div>
   <div class="field">
@@ -28,6 +28,6 @@
     <%= f.text_field :price %>
   </div>
   <div class="actions">
-    <%= f.submit(value="登録") %>
+    <%= f.submit(value="登録する") %>
   </div>
 <% end %>

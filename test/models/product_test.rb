@@ -13,17 +13,17 @@ class ProductTest < ActiveSupport::TestCase
   end
 
   test "product price must be positive(製品価格は正の数でなければなりません)" do
-    c_2=Product.new(title:"xxx",
+    c_2=Product.new(title:"xxx123456789",
                     description:"yyy",
                     image_url:"zzz.png")
     c_2.price=-1
     assert c_2.invalid?
-    assert_equal "must be greater than or equal to 0.01",
+    assert_equal "は0.01以上の値にしてください",#must be greater than or equal to 0.01
       c_2.errors[:price].join('; ')
 
     c_2.price=0
     assert c_2.invalid?
-    assert_equal "must be greater than or equal to 0.01",
+    assert_equal "は0.01以上の値にしてください",#must be greater than or equal to 0.01
       c_2.errors[:price].join('; ')
 
     c_2.price=1     ; assert c_2.valid?
@@ -32,11 +32,12 @@ class ProductTest < ActiveSupport::TestCase
   end
 
   def new_product(image_url)
-    Product.new(title:"MybookTitle",
+    Product.new(title:"MybookTitle1234567",
                 description:"yyy",
                 price:1,
                 image_url:image_url)
   end
+
   test "img_url(画像のファイル形式)" do
     ok = %w{fred.gif fred.jpg fred.png FRED.JPG FRED.Jpg
             http://a.b.c/x/y/z/frea.gif }
@@ -48,14 +49,39 @@ class ProductTest < ActiveSupport::TestCase
     bad.each do |name|
       assert new_product(name).invalid?, "#{name} shouldn't be valid"
     end
+  end
 
+  test "product title legth is so long (product長)" do
+    c_4=products(:ruby)
+    c_4.title="12345678910"
+    assert c_4.valid?
   end
-  test "puroduct is not valid without a unique title(puroductは、ユニークなタイトルでないと有効ではありません)" do
-    c_3=Product.new(title:products(:ruby).title,
-                    description:"yyy",
-                    price: 1,
-                    image_url:"fred.gif")
-    assert !c_3.save
-    assert_equal "has already been taken",c_3.errors[:title].join('; ')
+
+  test "title minimum 10 characters" do
+    product = products(:ruby)
+
+    product.title = "123456789"
+    assert product.invalid?
+    assert product.errors[:title].join(";").include?("文字以上")
+
+    product.title = "あいうえおかきくけ"
+    assert product.invalid?
+
+    product.title = "1234567890"
+    assert product.valid?
+
+    # 全てが半角スペースの時は「空っぽ扱い」らしいよ！
+    product.title = "          "
+    assert product.invalid?, "#{product.title.size} characters"
+    assert product.errors[:title].join(";").include?("を入力してください")
+
+    # 全てが全角スペースの時も「空っぽ扱い」らしいよ！
+    product.title = "　　　　　　　　　　"
+    assert product.invalid?, "#{product.title.size} characters"
+
+    # 1文字でもスペース以外が含まれていたらvalidらしいよ！
+    product.title = "1         "
+    assert product.valid?, "#{product.title.size} characters"
   end
+
 end

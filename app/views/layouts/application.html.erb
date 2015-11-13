@@ -15,11 +15,14 @@
 </div>
 <div id="columns">
   <div id="side">
+  <p><%= @time %></p>
     <ul>
-      <li><a href="http://www....">ホーム</a></li>
+      <li><%= link_to 'ホーム', store_path %></li>
       <li><a href="http://www..../faq">よくある質問</a></li>
       <li><a href="http://www..../news">ニュース</a></li>
+      <li><%= link_to '製品', products_path %></li>
       <li><a href="http://www..../contact">お問い合わせ</a></li>
+      <li><%= link_to 'カートを見る', carts_path %></li>
     </ul>
   </div>
   <div id="main">  <%= yield %> </div>

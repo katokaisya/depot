@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: Dave Thomas
+  address: MyText
+  email: dave@email.com
+  pay_type: 現金
+
+two:
+  name: Daigo Tokunaga
+  address: MyText
+  email: daigo@hogehoge.jp
+  pay_type: クレジットカード

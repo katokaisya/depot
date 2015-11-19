@@ -8,5 +8,6 @@ class StoreController < ApplicationController
     puts "デバッグ用＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝"
     (session[:counter].nil?) ? session[:counter]=1 : session[:counter]+=1
     @counter="#{session[:counter]}回目のアクセスです。"
+    @cart=current_cart    #@cartを定義
   end
 end

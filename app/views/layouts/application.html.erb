@@ -22,11 +22,13 @@
       <li><a href="http://www..../news">ニュース</a></li>
       <li><%= link_to '製品', products_path %></li>
       <li><a href="http://www..../contact">お問い合わせ</a></li>
-      <li><%= link_to 'カートを見る', carts_path %></li>
+      <%  if @cart %>
+      <li><%= link_to 'カートを見る', cart_path(@cart) %></li>
+      <% end %>
     </ul>
     <p><span class="red"><%= @counter %></span></p>
   </div>
-  <div id="main">  <%= yield %> </div>
+  <div id="main"><%= yield %></div>
 </div>
 </body>
 </html>

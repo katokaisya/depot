@@ -46,3 +46,5 @@ group :development do
 end
 
 gem 'will_paginate'
+
+gem 'simplecov'

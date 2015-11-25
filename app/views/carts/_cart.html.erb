@@ -1,0 +1,13 @@
+<% unless cart.line_items.empty? %>
+<div class="cart_title">カート</div>
+<table>
+  <%= render(@cart.line_items) %><!--line_itemsに部分テンプレートを取りに行くS-->
+  <tr class="total_line">
+    <td colspan="2">合計</td>
+    <td class="total_cel"><%= number_to_currency(@cart.total_price) %></td>
+  </tr>
+</table>
+<p><%= button_to('購入する', new_order_path,method: :get) %></p>
+<p><%= button_to('カートを空にする', @cart, method: :delete, data:{confirm: '本当によいですか？'}) %></p>
+
+<% end %>

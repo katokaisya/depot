@@ -22,6 +22,9 @@
 </div>
 <div id="columns">
   <div id="side">
+    <div id="cart">
+      <%= render @cart %>
+    </div>
   <p><%= @time %></p>
     <ul>
       <li><%= link_to t('.home'), store_path %></li>

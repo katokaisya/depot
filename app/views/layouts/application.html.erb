@@ -10,23 +10,31 @@
 </head>
 <body class='<%= controller.controller_name %>'>
 <div id="banner">
+  <%= form_tag store_path, class: 'locale', method: :get do %>
+    <%= select_tag 'set_locale',
+      options_for_select(LANGUAGES, I18n.locale.to_s),
+      onchange: 'this.form.submit()' %>
+    <%= submit_tag 'submit' %>
+    <%= javascript_tag "$('.locale input').hide()" %>
+  <% end %>
   <%= image_tag("logo.png") %>
-  <%= @page_title || "Pragmatic Bookshelf" %>
+  <%= @page_title || t('.title') %>
 </div>
 <div id="columns">
   <div id="side">
   <p><%= @time %></p>
     <ul>
-      <li><%= link_to 'ホーム', store_path %></li>
-      <li><a href="http://www..../faq">よくある質問</a></li>
-      <li><a href="http://www..../news">ニュース</a></li>
-      <li><a href="http://www..../contact">お問い合わせ</a></li>
+      <li><%= link_to t('.home'), store_path %></li>
+      <li><a href="http://www..../faq"><%= t('.questions') %></a></li>
+      <li><a href="http://www..../news"><%= t('.news') %></a></li>
+      <li><a href="http://www..../contact"><%= t('.contact') %></a></li>
       <%  if @cart %>
-      <li><%= link_to 'カートを見る', cart_path(@cart) %></li>
+      <li><%= link_to t('.show'), cart_path(@cart) %></li>
       <% end %>
     </ul>
 <!--サイドバー管理機能の追加-->
     <% if session[:user_id] %>
+    <p><%= @user.name %></p>
     <ul>
       <li><%= link_to '注文',   orders_path %></li>
       <li><%= link_to '商品',   products_path %></li>

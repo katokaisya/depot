@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
 #ベーシック認証テスト~ここから(htmlリクエストではない場合)
   def basic
     puts "==============#{request.format}========"
-    unless request.format == 'text/html'
+    unless %w(text/html text/javascript).include?(request.format)
       authenticate_or_request_with_http_basic do |user, pass|
         user == 'user' && pass == 'pass'
       end

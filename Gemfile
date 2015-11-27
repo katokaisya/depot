@@ -55,3 +55,10 @@ end
 gem 'will_paginate'
 
 gem 'simplecov'
+
+gem 'rails-erd'
+  #ER図を作ってくれる。bundle後に　sudo apt-get install graphviz
+gem 'annotate'
+
+gem 'thin'
+  # thin speeds up
